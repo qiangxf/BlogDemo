@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="../css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="../css/editormd.css" />
+<script type="text/javascript">
+	function load(){
+		htmlobj=$.ajax({
+			method:"POST",
+			url:"http://localhost:8080/showBlog",
+			data:{},
+			dataType:"text",
+			success:function(data){
+				var text = data;
+				$("#content").html(text);
+			  },
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+</script>
+
+
+<body onload="load()">
+	<div class="content" id="content" style="width: 800px;"></div>
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="../lib/marked.min.js"></script>
+    <script src="../lib/prettify.min.js"></script>
+    <script src="../editormd.min.js"></script>
+    
+      <script type="text/javascript">
+    editormd.markdownToHTML("content",{
+          htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true,  // 默认不解析
+        });
+  </script>
+</body>
+</html>
