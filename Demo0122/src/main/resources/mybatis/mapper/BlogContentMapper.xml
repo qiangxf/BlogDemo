@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example0122.demo0122.mapper.BlogContentMapper">
+
+<insert id="addContent" parameterType="com.example0122.demo0122.entity.BlogContent">
+	insert into blogcontent (blog_content,blog_html) VALUES(#{blogContent.blogContent},#{blogContent.blogHtml});
+</insert>
+
+	<select id="findContent" resultType="java.lang.String">
+		SELECT * from blogcontent;
+	</select>
+</mapper>
