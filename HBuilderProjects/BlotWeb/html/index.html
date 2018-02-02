@@ -43,16 +43,25 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $("button").click(function(){
+		  		
+		var date = new Date();
+		var n = date.getFullYear();
+		var y = date.getMonth()+1;
+		var t = date.getDate();
+		var h = date.getHours();
+		var m = date.getMinutes();
+		var s = date.getSeconds();
+		var mytime = date.toLocaleDateString();
+		var now = mytime+h+m+s;
 			  htmlobj=$.ajax({
 				  method:"POST",
 				  url:"http://localhost:8080/testMapping",
 				  async:false,
-				  data:{username:$("#editorhtml").val(),password:$("#editormd").val()},
+				  data:{username:$("#editorhtml").val(),password:$("#editormd").val(),addTime:now},
 				  dataType:"json",
 				  success:function(data){
 					  alert("新增成功~");
-					  $(location).attr('href', 'http://localhost:8080/showMapping?data='+data.blogContent);
-				
+					  $(location).attr('href', 'indextwo.html?content='+now);
 				  },
 				  error:function(){
 					  alert("error");
@@ -70,7 +79,6 @@
 		    <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
 		    <textarea class="editormd-html-textarea" name="editorhtml" id="editorhtml"></textarea>       
 	    </div>
-	    <button id="btn">button</button><br>
-	    
+	    <button id="btn">button</button><br>   
 	</body>
 </html>
