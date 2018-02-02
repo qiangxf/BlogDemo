@@ -14,5 +14,5 @@ public interface BlogContentMapper {
 	//修改
 	//public void updateContent(@Param("blogContent") BlogContent blogContent);
 	//查询
-	public String findContent();
+	public String findContent(@Param("blogContent") BlogContent blogContent);
 }

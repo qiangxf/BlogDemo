@@ -17,30 +17,38 @@ import javax.annotation.Resource;
 
 @RestController
 public class TestController {
-
+	//定义一个全局的博客内容变量
+	String blogContent;
+	
 	@Resource
 	public BlogContentMapper blogContentMapper;
 	
 	@RequestMapping(value = "/testMapping",method = RequestMethod.POST)
 	public BlogContent findAll(@RequestParam(value = "username",required = false,defaultValue = "1111") String textArea,
-				@RequestParam(value="password",required=false,defaultValue="222") String password) {
+				@RequestParam(value="password",required=false,defaultValue="222") String password,@RequestParam(value="addTime",required = false,defaultValue="3333") String addTime) {
 		String text = textArea;
 		String text2 = password;
-		System.out.println(text);
-		System.out.println(text2);
+		String text3 = addTime;
 		BlogContent blogContent = new BlogContent();
 		blogContent.setBlogHtml(text);
 		blogContent.setBlogContent(text2);
+		blogContent.setAddTime(text3);
 		blogContentMapper.addContent(blogContent);
 		return blogContent;
 	}
 	
 	@RequestMapping(value="/showBlog",method=RequestMethod.POST)
-	public String showAll() {
-		return "<h2 id=\"h2-u6D4Bu8BD5\"><a name=\"测试\" class=\"reference-link\"></a><span class=\"header-link octicon octicon-link\"></span>测试</h2><p>大萨达撒大萨达撒阿达撒打算啊实打实多撒啊实打实大所阿达撒打算</p>\r\n" + 
-				"<pre><code>public void main(String [] args){\r\n" + 
-				"    test main;\r\n" + 
-				"}\r\n" + 
-				"</code></pre>";
+	public String showAll(@RequestParam(value="blogHtml",required = false,defaultValue="asdsadas") String blogHtml) {
+		BlogContent blog = new BlogContent();
+		blog.setAddTime(blogHtml);
+		String blogContent = blogContentMapper.findContent(blog);	
+		return blogContent;
+	}
+
+	@RequestMapping(value = "/showMapping",method = RequestMethod.GET)
+	public String getContent(@RequestParam(value = "content",required = false,defaultValue = "2222") String content){
+		System.out.println("后台接受的值是："+content);
+		blogContent = content;
+		return "成功";
 	}
 }

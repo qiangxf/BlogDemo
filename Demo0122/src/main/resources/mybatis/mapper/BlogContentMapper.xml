@@ -5,10 +5,10 @@
 <mapper namespace="com.example0122.demo0122.mapper.BlogContentMapper">
 
 <insert id="addContent" parameterType="com.example0122.demo0122.entity.BlogContent">
-	insert into blogcontent (blog_content,blog_html) VALUES(#{blogContent.blogContent},#{blogContent.blogHtml});
+	insert into blogcontent (blog_content,blog_html,add_time) VALUES(#{blogContent.blogContent},#{blogContent.blogHtml},#{blogContent.addTime});
 </insert>
 
-	<select id="findContent" resultType="java.lang.String">
-		SELECT * from blogcontent;
+	<select id="findContent" resultType="java.lang.String" parameterType="com.example0122.demo0122.entity.BlogContent">
+		SELECT blog_html from blogcontent where add_time = #{blogContent.addTime};
 	</select>
 </mapper>
